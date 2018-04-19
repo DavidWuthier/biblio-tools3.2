@@ -7,6 +7,8 @@ It's meant to be run on Linux. It includes an example project with a make file t
 
 ## Dependencies
 
+For Python:
+
 ```
 pip install numpy
 pip install argparse
@@ -18,12 +20,18 @@ pip install subprocesses
 pip install networkx
 ```
 
-And for python 3:
+For Python 3:
 
 ```
 sudo apt-get install python3-numpy
 sudo apt-get install python3-unidecode
 sudo apt-get install python3-networkx
+```
+
+Apache2 server for BiblioMaps:
+
+```
+sudo apt-get install apache2
 ```
 
 ## Workflow
