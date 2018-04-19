@@ -1,3 +1,36 @@
+
+# BiblioTools
+
+This is a fork of the BiblioTools/BiblioMaps project that can be found at http://www.sebastian-grauwin.com/bibliomaps.
+
+It's meant to be run on Linux. It includes an example project with a make file to simplify the workflow.
+
+## Dependencies
+
+  pip install numpy
+  pip install argparse
+  pip install json
+  pip install itertools
+  pip install unidecode
+  pip install collections
+  pip install subprocesses
+  pip install networkx
+
+For python 3:
+
+  sudo apt-get install python3-numpy
+  sudo apt-get install python3-unidecode
+  sudo apt-get install python3-networkx
+
+## Workflow
+
+Add your .csv files in the "raw" folder, then
+
+  make
+  sudo make install
+
+Open Firefox to the address "localhost", select "bibliomaps" and that's it!
+
    -----------------------------------------------------------------------------
 
    BiblioTools is a set of python scripts that can be used to analyse bibligraphic data. essentially, the scripts take Web of Science or Scopus bibliographic data files as input and prepare formatted output files that can be used either in (the graph vizualisation tool) Gephi or in (the web interative visualition platform) BiblioMaps.
