@@ -36,9 +36,10 @@ sudo apt-get install apache2
 
 ## Workflow
 
-Add your .csv files in the "raw" folder, then
+Add your .csv files in "biblio-tools3.2/myproject/raw", then
 
 ```
+cd biblio-tools3.2/myproject
 make
 sudo make install
 ```
