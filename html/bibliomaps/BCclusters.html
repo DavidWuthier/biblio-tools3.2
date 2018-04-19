@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>BiblioMaps/BCclusters</title>
+    <link rel="stylesheet" type="text/css" href="css/input.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="css/loading.css" media="screen" />
+    <link rel="stylesheet" href="css/bibliomap_BC.css"/>       
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" href="css/awesomplete.css" />
+    <script src="js/awesomplete.js" async></script>
+    <script type="text/javascript">
+      function loadPage(href){
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("GET", href, false);
+        xmlhttp.send();
+        return xmlhttp.responseText;
+      }
+    </script>  
+</head>
+
+<body onload="d3.select('#headermenu').html(loadPage('headermenu.html'));togglemenu('3');">
+  <!-- HEADER+MENU  -->
+  <div id="headermenu"></div>
+
+  <!-- OUTPUT INFO PANEL-->
+  <div id="layoutinfo" style="position:fixed;margin-left:300px;margin-top:150px;height:350px;width:700px;border:5px solid #0A95D5;background:white;visibility:hidden;padding:20px;overflow-y:auto;"></div>
+
+  <!-- SIDEPANEL -->
+  <div id="sidepanel">
+    <div id="title">Thematic Map<br/><span id="choosecorpus"></span></div>  
+    </div-->    
+
+    <div id="subtitle">
+      <p>Based on the references they share, <span id="Nbc"></span> thematically close publications of the studied corpus are gathered into <strong><span id="Ntopics"></span> topics</strong> (Q=<span id="Qtop"></span>) and <strong><span id="Nsubtopics"></span> subtopics</strong> (Q=<span id="Qsub"></span>). For methodological details and tutorials, refer to the <i><a href="index.html">About the project</a></i> page.</p>
+    </div>
+
+
+    <div id="sidetabs">
+      <div id="tab-links" class="tab-links">
+        <bb id="xtab1" class="active" onclick="toggletab('tab1')" >Legend</bb>
+        <bb id="xtab2" onclick="toggletab('tab2')" >Search</bb>
+        <bb id="xtab3" onclick="toggletab('tab3')" >Layout</bb>
+        <bb id="xtab4" onclick="toggletab('tab4')" >Export</bb>
+      </div>
+
+      <div class="tab-content">
+        <!-- LEGEND -->
+        <div id="tab1" class="tab active">
+          <br/>
+
+          <div class="line">
+            <svg height="14" width="15"><circle cx="8" cy="7" r="7" fill="lightgreen" /></svg>
+            <b>Circles</b> represent research topics. Circle <i>size</i> is proportional to the number of publications in a topic.
+          </div>
+
+          <div class="line">
+            <svg height="15" width="15"><line x1="3" y1="15" x2="14" y2="1" style="stroke: #B2D9D8;stroke-width:3" /></svg>
+            <b>Lines</b> represent connections between topics. Line <i>thickness</i> is proportional to the similarity of two topics.
+          </div>  
+
+          <div class="line">
+            <svg height="15" width="15">
+              <polygon points="8,8,8,16,15,12" style="fill:magenta;" />
+              <polygon points="8,8,15,12,15,4" style="fill:royalblue;" />
+              <polygon points="8,8,15,4,8,0" style="fill:lightgreen;" />
+              <polygon points="8,8,8,0,1,4" style="fill:yellow;" />
+              <polygon points="8,8,1,4,1,12" style="fill:orange;" />
+              <polygon points="8,8,1,12,8,16" style="fill:red;" />
+            </svg> 
+            <b>Colors</b> represent inclusions within a research topic.
+          </div>
+
+          <div class="line">
+            <svg height="15" width="15">
+              <text x="1" y="12" style="font-size:12px;fill:black;">Xy</text>
+            </svg>
+            <b>Labels</b> correspond to: <div id='selectlabel'></div>
+          </div>
+
+        </div>
+
+        <!-- SEARCH -->
+        <div id="tab2" class="tab">
+        <br/>
+          <div class="line">
+            <strong>Do a simple search</strong> among the most frequent items of the topics. <span id="info_search" class="infobulle" style="vertical-align:top;">?</span>
+          </div>
+
+          <div id="search">
+            Search for: <br/>
+            <!--input type="text" name="search" id="MYsearch" placeholder="" class="empty"/><br/-->
+            <input type="text" name="search" id="MYsearch" placeholder="" /><br/>
+            among the <br/>
+            <span id="selectsearchfield"></span>
+
+            <span id="SearchRes" class="SearchRes"></span>
+            <!--div id='selectcolor' style='display:none'></div-->
+          </div><br/>
+
+          <div id="Searchcbar" class="line" style="display:none;">
+            <div id="mycolorbar" ></div>
+            <span id="showPC" >Show % in labels<input type="checkbox" id="SHOWPCcheckbox" value="checkbox"></span>
+          </div>
+
+        </div>
+
+        <!-- CONTROLS -->
+        <div id="tab3" class="tab">
+          <br/>
+          <!--Filter clusters according to their size and/or links according to their thickness.<br/><br/-->
+          <div class="line">
+            <strong>Filter links</strong> according to their thickness (keep only the stronger connections):<br/><br/>
+            <div id="filters"></div>
+          </div><br/>
+
+          <div class="line">
+            <strong>Spatialize the graph</strong> by tuning the parameters of the force-based spatialisation algorithm.<br/><br/>
+            <div><button id="STARTSTOP">START/STOP</button></div>
+            <div id="forceparam"></div>
+          </div><br/>
+
+          <div class="line">
+            <strong>Reset the parameters:</strong><br/>
+            <div id="reset"></div>
+          </div>
+
+        </div>
+
+        <!-- EXPORT -->
+        <div id="tab4" class="tab">
+          <br/>
+          <div class="line">
+            <strong>Spatial transformation:</strong><br/>
+            <table style="width:95%;">
+            <tr><td><i>Horizontal symmetry</i></td><td><div id="hsym"></div></td></tr>
+            <tr><td><i>Vertical symmetry</i></td><td><div id="vsym"></div></td></tr>
+            <tr><td><i>Rotate angle (°) </i><input id="rot" style="width:30px" type="number" min=-90 max=90 step=1 value="5" ></td><td><div id="rotation"></div></td></tr>
+            <tr><td><i>Default spatial layout</i></td><td><div id="resetLayout"></div></td></tr>
+            </table>
+          </div><br/>
+
+          <div class="line">
+            <strong>Labels format:</strong><br/>
+            <table style="width:95%;">
+            <tr><td><i>Font style </i><select id="FSTYLE" ><option value="n" selected>normal</option><option value="b">bold</option><option value="i">italic</option><option value="bi">bold italic</option></select></td><td><div id="labfontstyle"></div></td></tr>
+            <tr><td><i>Font size </i><input id="FS" style="width:30px" type="number" min=1 max=40 step=1 value="10" ></td><td><div id="labfontsize"></div></td></tr>
+            <tr><td><i>Default format</i></td><td><div id="resetFormat"></div></td></tr>
+            </table>  
+          </div><br/>
+
+          <div class="line">
+            <strong>Export graph:</strong><br/>
+            <div id="export"></div>
+          </div>
+        </div>
+
+      </div>  
+
+    </div>
+    <!-- END SIDETABS -->
+
+  </div>
+  <!-- END SIDEPANEL -->
+
+  <div id="options"></div>
+
+  <!-- GRAPH-->
+  <div id="biblioMap">   
+  <div id="loading"><strong>loading...</strong><span></span></div>
+  </div>
+
+  <!-- Cluster Info-->
+  <div id="clusterInfo" class="panel_off"></div>
+  <div id="tooltip_pubyear"></div>  
+  <div id="tooltip_bulle"></div> 
+
+
+  <script src="js/d3.min.js"></script>
+  <script src="js/bibliomap_togglemenu.js"></script>
+  <script src="js/bibliomap_saveSvgAsPng.js"></script>
+  <script src="js/bibliomap_BCclusters.js"></script> 
+  <script>
+
+    var keepitem=['K', 'S', 'J', 'C', 'R', 'RJ', 'MRP', 'MCP', 'MCAU'] // I, TK, S2
+    var mylabel = undefined;
+
+    // ***************************************************
+    // how many corpus are shown?   
+    howmany='one'  // 'one' or 'several'
+    // ***************************************************
+    
+    // case when only one corpus
+    if(howmany=='one'){
+      defaultfile='data/BCdefaultVAR.json'
+      datafile='data/BCclusters.json'
+      doBCviz();
+    }
+
+    // case when there are several corpus
+    if(howmany=='several'){
+      // ************************************
+      // copy here the line that was written in the AA_log.txt file when you run the all_in_one.py python file.
+      // it should be of the form: timeWND=[[Y1A, Y1B],[Y2A,Y2B]];
+      timeWND=[]
+      files_suffix=''
+
+      // ************************************
+
+      thehtml='<select id="selectC" style="width:140px;background-color:#F8F8F8;color:#0095D7;font-weight:bold;">'
+      timeWND.forEach(function(elt,i){thehtml+='<option value="'+i+'">'+elt[0]+'-'+elt[1]+' corpus</option>'})
+      thehtml+='</select>'
+      d3.select('#choosecorpus').html(thehtml)
+      d3.select('#selectC').on('change',function(){update_corpus();})
+      update_corpus();
+
+      function update_corpus(){
+        myTW=document.getElementById("selectC").value;
+        defaultfile='data/BCdefaultVAR_'+timeWND[myTW][0]+'_'+timeWND[myTW][1]+files_suffix+'.json'
+        datafile='data/BCclusters_'+timeWND[myTW][0]+'_'+timeWND[myTW][1]+files_suffix+'.json'
+
+        // do viz
+        doBCviz();
+      }
+    }
+
+  </script>  
+  <script>
+    function toggletab(mytab){
+      //... select the activative tabulation
+      d3.select("#tab1").attr( 'class', 'tab')
+      d3.select("#tab2").attr( 'class', 'tab')
+      d3.select("#tab3").attr( 'class', 'tab')
+      d3.select("#tab4").attr( 'class', 'tab')
+      d3.select("#"+mytab).attr( 'class', 'tab active')
+      //... select the activative tabulation title
+      d3.select("#xtab1").attr( 'class', '')
+      d3.select("#xtab2").attr( 'class', '')
+      d3.select("#xtab3").attr( 'class', '')
+      d3.select("#xtab4").attr( 'class', '')
+      d3.select("#x"+mytab).attr( 'class', 'active')
+    }
+  </script> 
+</body>
+</html>

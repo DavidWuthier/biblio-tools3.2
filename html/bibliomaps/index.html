@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>BiblioMap/index</title>
+    <link rel="stylesheet" href="css/bibliomap_maincss.css"/>
+    <script type="text/javascript">
+      function loadPage(href){
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("GET", href, false);
+        xmlhttp.send();
+        return xmlhttp.responseText;
+      }
+    </script>
+</head>
+
+<body onload="onload=d3.select('#headermenu').html(loadPage('headermenu.html'));togglemenu('1');">
+<!-- HEADER+MENU  -->
+<div id="headermenu"></div>
+<div id="sidepanel"></div>
+
+<!-- MAIN TEXT  -->
+<div id="wrapper">
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<h1 >Project XXX</h1>
+<h2 >Lorem ipsum</h2>
+Ciliciam vero, quae Cydno amni exultat, Tarsus nobilitat, urbs perspicabilis hanc condidisse Perseus memoratur, Iovis filius et Danaes, vel certe ex Aethiopia profectus Sandan quidam nomine vir opulentus et nobilis et Anazarbus auctoris vocabulum referens, et Mopsuestia vatis illius domicilium Mopsi, quem a conmilitio Argonautarum cum aureo vellere direpto redirent, errore abstractum delatumque ad Africae litus mors repentina consumpsit, et ex eo cespite punico tecti manes eius heroici dolorum varietati medentur plerumque sospitales.
+
+Haec igitur Epicuri non probo, inquam. De cetero vellem equidem aut ipse doctrinis fuisset instructior est enim, quod tibi ita videri necesse est, non satis politus iis artibus, quas qui tenent, eruditi appellantur aut ne deterruisset alios a studiis. quamquam te quidem video minime esse deterritum.
+
+Hae duae provinciae bello quondam piratico catervis mixtae praedonum a Servilio pro consule missae sub iugum factae sunt vectigales. et hae quidem regiones velut in prominenti terrarum lingua positae ob orbe eoo monte Amano disparantur.
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<h2 >Lorem ipsum</h2>
+Ciliciam vero, quae Cydno amni exultat, Tarsus nobilitat, urbs perspicabilis hanc condidisse Perseus memoratur, Iovis filius et Danaes, vel certe ex Aethiopia profectus Sandan quidam nomine vir opulentus et nobilis et Anazarbus auctoris vocabulum referens, et Mopsuestia vatis illius domicilium Mopsi, quem a conmilitio Argonautarum cum aureo vellere direpto redirent, errore abstractum delatumque ad Africae litus mors repentina consumpsit, et ex eo cespite punico tecti manes eius heroici dolorum varietati medentur plerumque sospitales.
+
+Haec igitur Epicuri non probo, inquam. De cetero vellem equidem aut ipse doctrinis fuisset instructior est enim, quod tibi ita videri necesse est, non satis politus iis artibus, quas qui tenent, eruditi appellantur aut ne deterruisset alios a studiis. quamquam te quidem video minime esse deterritum.
+
+Hae duae provinciae bello quondam piratico catervis mixtae praedonum a Servilio pro consule missae sub iugum factae sunt vectigales. et hae quidem regiones velut in prominenti terrarum lingua positae ob orbe eoo monte Amano disparantur.
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+
+
+
+
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<!-- xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx -->
+<h1 id="CRE">Credits</h1>
+Data analysis and visualization built with <a href="http://www.sebastian-grauwin.com/bibliomaps" target="new">Sebastian Grauwin's BiblioMaps.</a><br> Please note that the visualizations may not work on all browsers. <br/> 
+
+
+<!-- ***************************************************************************** -->
+<div class="clearing" style="margin-bottom:200px"></div>
+</div><!--end wrapper-->
+<!-- ***************************************************************************** -->
+<script src="js/d3.min.js"></script>
+<script src="js/bibliomap_togglemenu.js"></script>
+<script>d3.select("#sidepanel").style("height",(Math.max(d3.select("#wrapper").style('height').slice(0,-2), (window.innerHeight-50))+"px"))</script>
+</body>
+</html>

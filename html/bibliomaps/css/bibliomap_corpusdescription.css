@@ -1,0 +1,295 @@
+/* ---------------------------------------------------------------------------
+   (c) BiblioMap, 2015
+   Author: Sebastian Grauwin
+
+   -------------------------------------------------------------------------- */
+body {
+  background-color: #fff;
+  font-family: 'Roboto', sans-serif;
+  color : #3d464d;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+/* ....................................................................... */
+/* ....................................................................... */
+/* Left side panel */
+div#sidepanel {
+    position: absolute;
+    pointer-events: none;    
+    background-color: #f9f9f9;
+    top: 40px;
+    left:0px;
+    border: 0;
+    width: 240px;
+    pointer-events: all;
+}
+
+/* .... title .... */
+div#title {
+  margin: 4px 2px 0px 0px;
+  border-width: 0px;
+  padding-left: 10px;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  pointer-events: stroke;
+  line-height: 18px;
+  color: #0095D7; /*#0070E0*/
+  font-size: 20px;
+  font-weight: 600;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* .... small text under title .... */
+div#subtitle {padding-left: 10px; pointer-events: all; font-size: 11px; padding-top:5px; padding-bottom:5px;}
+
+
+/* ....................................................................... */
+
+.infobulle{
+  color:white;
+  text-align:center; 
+  vertical-align:middle;
+  cursor:default;  
+  width:1.1em; 
+  height:1.1em; 
+  border-radius:0.65em; 
+  background-color:#0095D7;
+}
+
+.tooltip_bulle {
+  position: absolute;
+  color:white;
+  width: 400px;
+  padding:10px;
+  border-radius:0.2em;
+  background-color: #0095D7;
+  font-weight:normal;
+  z-index:1004;
+  font-size: 12px;
+  pointer-events: none;
+}
+
+/* ....................................................................... */
+div#container{
+  position:absolute;
+  top: 40px;
+  left:245px;
+}
+
+/* lists */
+div#list{
+    position: absolute;
+    width:40%;
+    height:100%;
+    pointer-events: all;
+    border: solid 1px #aaa;      
+}
+div#list th { 
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+  border-right: 1px solid #f9f9f9;
+  border-left: 1px solid #f9f9f9;
+  border-top: 1px solid #f9f9f9;
+  font-size: 9px !important;
+  font-weight: 400 !important;
+  color:  #aaa;
+  padding-left: 5px;
+}
+div#list  table td { 
+  background-color: #fff;
+  border-right: 1px solid #f9f9f9;
+  border-left: 1px solid #f9f9f9;
+  border-top: 1px solid #eee;
+  padding: 5px 2px 5px 5px;
+}
+div#list  table td:nth-child(3),div#list  table td:nth-child(4) { 
+  color:#888;
+}
+div#list  table td:nth-child(1) { 
+  color:#ccc; 
+  font-size: 9px !important;
+}
+
+/* ....................................................................... */
+/* graph */
+
+div#graph_container {
+    position: absolute;
+    left:40%;
+    width: 60%;
+    height: 100%;
+    padding-top:0%;
+    background: white;
+    font-size: 9pt;
+    border: solid 1px #aaa;    
+}
+
+path { 
+    stroke: blue;
+    stroke-width: 2;
+    fill: none;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.tick line{
+    opacity: 0.1;
+  }
+
+.dot {
+  stroke: #81BEF7; /*#000;*/
+  fill : #81BEF7;
+  z-index:1;
+}
+
+.bar {
+  fill: #81BEF7;
+  stroke: steelblue;
+}
+
+.bar:hover {
+  fill: steelblue;
+}
+
+.arc path {
+  stroke: #fff;
+}
+
+.node {
+  border: solid 1px white;
+  font: 10px sans-serif;
+  background: #81BEF7;
+  line-height: 12px;
+  overflow: hidden;
+  position: absolute;
+  text-indent: 2px;
+}
+
+
+.slider {
+  /*-ms-transform: rotate(-90deg);  // IE 9 
+  -webkit-transform: rotate(-90deg); // safari
+  transform: rotate(-90deg);  */  
+  position: absolute;
+  text-align: center;
+  height: 20px; 
+  width: 15%;  
+  padding:0px;
+  z-index:10;
+  font-size: 9pt;
+  line-height: 13pt;
+  pointer-events: all;
+}
+
+.redocloud {
+  /*-ms-transform: rotate(-90deg);  // IE 9 
+  -webkit-transform: rotate(-90deg); // safari
+  transform: rotate(-90deg);  */  
+  position: absolute;
+  text-align: center;
+  height: 20px; 
+  width: 20px;  
+  padding:0px;
+  top:45px;
+  z-index:10;
+  font-size: 9pt;
+  line-height: 13pt;
+  pointer-events: all;
+}
+
+.tooltip {
+  position: absolute;
+  width: 140px;
+  /*height: 42px;*/  
+  padding:10px;
+  z-index:2;
+  font-size: 12px;
+  pointer-events: none;
+  color:white;
+  border-radius:0.2em;
+  background-color: #0095D7 ;
+  font-weight:normal;
+}
+
+
+line.link {
+    stroke: #B2D9D8;
+}
+
+line.linking {
+    stroke: #2E9AFE;
+}
+
+circle {
+    cursor: crosshair;
+    fill-opacity: 0.8;
+}
+
+circle.sibling {
+    fill-opacity: 0.8;
+}
+
+circle.main {
+  stroke: #333;
+  stroke-width: 3px;
+  stroke-opacity: 0.3;
+  fill-opacity: 1;
+}
+
+/* ....................................................................... */
+/* Graph labels, for cooccurrence networks */
+
+g.gLabel {
+    font: 10px sans-serif;
+    font-weight: normal;
+    visibility: hidden;
+}
+
+g.on {
+    visibility: visible;    
+    opacity:0.5;
+}
+
+g.zoomed {
+    font-size: 10px;
+    font-weight: normal;
+    text-align: center;
+    color: #000;
+    border: none;
+}
+
+text {
+    font: 0.9vw sans-serif;
+    font-weight: normal;
+}
+
+text.nlabel {
+    /*stroke: #000000;*/
+}
+
+text.sibling {
+    stroke-opacity: 0.0;
+    fill-opacity:0.4;
+    /*stroke: #000000;*/
+}
+
+text.nshadow {
+    stroke: #fff;
+    stroke-width: 4px;
+    stroke-opacity: 1.0;
+}
+
+text.nshadowB{
+    visibility: hidden;
+}
+
+text.main {
+    font: 1.2vw sans-serif;
+    font-weight: bold;
+}

@@ -1,0 +1,95 @@
+input[type=range] {
+  -webkit-appearance: none;
+  margin: 12.5px 5px;
+  width: 75%;
+}
+input[type=range]:focus {
+  outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+  width: 75%;
+  height: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: #cecece;
+  border: 0px solid #000;
+  border-radius: 0px;
+}
+input[type=range]::-webkit-slider-thumb {
+  position: relative;
+  border: 0px solid rgba(255, 255, 255, 0.5);
+  height: 15px;
+  width: 15px;
+  border-radius: 100%;
+  background: #0095D7;
+  cursor: pointer;
+  z-index: 1;
+  -webkit-appearance: none;
+  margin-top: -5px;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: #cecece;
+}
+input[type=range]::-moz-range-track {
+  width: 75%;
+  height: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: #cecece;
+  border: 0px solid #000;
+  border-radius: 0px;
+}
+input[type=range]::-moz-range-thumb {
+  position: relative;
+  border: 0px solid rgba(255, 255, 255, 0.5);
+  height: 25px;
+  width: 25px;
+  border-radius: 100%;
+  background: #01c9ca;
+  cursor: pointer;
+  z-index: 1;
+}
+input[type=range]::-ms-track {
+  width: 70%;
+  height: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: transparent;
+  border-color: transparent;
+  border-width: 25px 0;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #cecece;
+  border: 0px solid #000;
+  border-radius: 0px;
+}
+input[type=range]::-ms-fill-upper {
+  background: #cecece;
+  border: 0px solid #000;
+  border-radius: 0px;
+}
+input[type=range]::-ms-thumb {
+  position: relative;
+  border: 0px solid rgba(255, 255, 255, 0.5);
+  height: 25px;
+  width: 25px;
+  border-radius: 100%;
+  background: #01c9ca;
+  cursor: pointer;
+  z-index: 1;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #cecece;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #cecece;
+}
+
+/* Custom by @mmt-zinee */
+.range {
+  box-sizing: border-box;
+  position: relative;
+  padding: 0 50px;
+  width: 100%;
+}

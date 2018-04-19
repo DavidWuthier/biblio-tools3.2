@@ -1,0 +1,492 @@
+/* ---------------------------------------------------------------------------
+   (c) BiblioMap, 2015
+   Author: Sebastian Grauwin
+
+   -------------------------------------------------------------------------- */
+body {
+	background-color: #fff;
+	font-family: 'Roboto', sans-serif;
+	color : #3d464d;
+	font-size: 12px;
+	font-weight: 400;
+}
+
+/* HREF links */
+a {color: #0070F0; text-decoration: none;}
+a:hover {	text-decoration: underline;}
+/*a:visited {color: #2196f3;}*/
+
+
+/* ....................................................................... */
+/* ....................................................................... */
+/* Left side panel */
+
+div#sidepanel {
+    position: absolute;   
+    background-color: #f9f9f9;
+    top: 40px;
+    left:0px;
+    border: 0;
+    width: 240px;
+    pointer-events: all;
+}
+
+/* .... title .... */
+div#title {
+	margin: 4px 2px 0px 0px;
+	border-width: 0px;
+	padding-left: 10px;
+	padding-top: 10px;
+	padding-bottom: 5px;
+	pointer-events: stroke;
+	line-height: 18px;
+	color: #0095D7; /*#0070E0*/
+	font-size: 20px;
+	font-weight: 600;
+	font-family: 'Roboto', sans-serif;
+}
+
+/* .... small text under title .... */
+div#subtitle {padding-left: 10px; pointer-events: all; font-size: 11px; padding-top:5px; padding-bottom:5px;}
+
+
+/* .... tabs .... */
+div#sidetabs {
+  margin: 0;
+  border-width: 0;
+  padding: 0;
+  pointer-events: stroke;
+	font-size: 11px;
+}
+
+div#tab-links {padding-left: 1px;}
+
+.tab-links bb {
+	padding:5px 5px; 
+	display:inline-block; 
+	background:#fff;
+	border : solid 1px #eee; 
+	font-size:12px; 
+	cursor:pointer; 
+	transition:all linear 0.05s;
+	}
+.tab-links bb:hover {
+	background-color: #32aadf; /*#007FFF;*/
+	border : solid 1px #32aadf; 
+	color: white;
+	font-weight: bold;
+	}
+.tab-links bb.active {
+	background:#0095D7; /*#0070E0*/ 
+	border : solid 1px #0095D7; /*#0070E0*/
+  color:white;
+	font-weight: bold; 
+ }
+.tab-content {border-top: 1px solid #0095D7; padding:1px; }/*#0070E0*/
+.tab {display:none;}
+
+
+.tab.active {display:block;
+padding: 5px;
+background-color:#fff;
+}
+.line { margin-bottom:8px;}
+
+div#tab1 select {width: 95%; }
+div#tab2 td {border:none;}
+#forceparam td {border:none;}
+#forceparam button {color: #000;margin-top: 1px;margin-right: 2px;cursor: cursor;pointer-events: all;}
+
+
+textarea {
+  max-width: 300px;
+  height: 100px;
+
+}
+
+input[type='text'],
+select {
+  height: 25px;
+  font-size : 11px;
+}
+
+/* ...............*/
+/* ...............*/
+/* export stuff*/
+#tab4 td {border:none;}
+
+
+
+*/
+/* ...............*/
+/* ...............*/
+/* search box*/
+#search input[name=search] {
+	background-color: #fff; 
+  background-image: url('../img/search-icon.png');
+  background-size: 18px 18px;
+  background-position: 2px 2px;
+  background-repeat: no-repeat; 
+	padding-left:24px; 
+	width: 200px; 
+	height:20px; 
+	color: #000;   
+}
+#search input.empty {
+	color: #000;cursor: 
+	cursor; 
+	pointer-events: all;
+	}
+#search button.emptyb {color: #000;margin-top: 1px;cursor: cursor;pointer-events: all;}
+#search span.SearchRes {margin-top: 6px; font-size: 11px; line-height: 13px; width=100px; color: blue;}
+
+
+/* ....................................................................... */
+/* ....................................................................... */
+/* Controls -- top middle of the screen */    
+div#options{
+    position: absolute;
+    top: 20px;
+    left:128px;
+    width:150px;
+    line-height: 23px;
+    padding-left: 10px;
+    font-size: 13px; 
+    pointer-events: stroke;
+}
+
+.c_options span{	
+	color:#1e1e1e;
+	font-size:12px;
+	padding:3px;
+	background:#fff;
+	border : #0095D7 1px solid;  /*#0070E0*/
+	cursor:pointer;
+	margin-right:0px;
+	text-decoration:none;
+}
+
+
+.c_options span:hover{
+	background-color: #32aadf; /*#007FFF;*/
+	border : #32aadf 1px solid;
+	color: white;
+	font-weight:bold;
+}
+.c_options span.active{color:white;background:#0095D7; font-weight:bold;} /*#0070E0*/
+
+
+/* ....................................................................... */
+/* ....................................................................... */
+/* mycolorbar -- right of the screen */    
+div#mycolorbar{
+    /*position: absolute;
+    top: 20%;
+    right:120px;
+    width:80px;
+    z-index: 502;*/
+    width:90%;
+    padding-top:10px;
+}
+
+/* ....................................................................... */
+/* On/off toggles for the info panels */
+
+div.panel_off {
+    visibility: hidden;
+    pointer-events: none;
+}
+
+div.panel_on {
+    visibility: visible;
+    pointer-events: all;
+}
+
+/* ....................................................................... */
+/* ....................................................................... */
+/* Cluster details panel */
+
+div#clusterInfo {
+    display: block;
+    position:absolute;
+    height:auto;
+    bottom:0;
+    top:40px;
+    right:0;
+    width: 350px;
+    margin: 0;
+    overflow-y: auto;
+    /*background-color:rgba(255,255,255,0.8);*/
+	  background-color: #f9f9f9;
+    border: 0 solid #ccc;
+    padding: 0px 15px 0px 15px; 
+    z-index: 1002; 
+	  -webkit-box-shadow: -2px -2px 10px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: -2px -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+div#clusterInfo  table, th, td {
+	border: 1px solid #ccc;
+	border-collapse: collapse;
+	padding: 5px;
+}
+
+.infobulle{
+  color:white;
+  text-align:center; 
+  vertical-align:middle;
+  cursor:default;  
+  width:1.1em; 
+  height:1.1em; 
+  padding:0 0.4em;
+  border-radius:0.65em; 
+  background:#0095D7; /*orange;*/
+}
+
+.tooltip_bulle {
+  position: absolute;
+  color:white;
+  width: 400px;
+  /*height: 42px;*/  
+  padding:10px;
+  border-radius:0.2em;
+  background-color: #0095D7;
+  font-weight:normal;
+  z-index:1004;
+  font-size: 12px;
+  pointer-events: none;
+}
+
+/* for pub year histogram*/
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+.tick line{
+    opacity: 0.1;
+  }
+.bar {
+  fill: #81BEF7;
+  stroke: steelblue;
+}
+.bar:hover {
+  fill: steelblue;
+}
+.tooltip_pubyear {
+  position: absolute;
+  padding: 4px 10px;
+  text-align: center;
+  font-size:0.8em;
+  color:white;
+  background:black;//#0095D7;
+  z-index:10000;
+  border: 0px;      
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+/* Transforms some tables elements in lower case (K and TK tables + MC AU, MRP, MCP) */
+/*div#clusterInfo table:nth-child(1) td,table:nth-child(3) td {
+	text-transform:lowercase;
+}
+div#clusterInfo td:first-letter { text-transform: uppercase; }*/
+
+
+/* First row of tables  */
+div#clusterInfo table tr:nth-child(1) th { 
+	background-color: #f9f9f9;
+	text-align:left;
+	color : #1e1e1e;
+	font-size: 15px !important;
+	font-weight: 500;
+	border-top: 1px solid #f9f9f9;
+	border-left: 1px solid #f9f9f9;
+	border-right: 1px solid #f9f9f9;
+	padding : 0px;
+	padding-top : 20px;
+	padding-bottom : 5px;
+	margin : 0px;
+}
+
+/* Second row of tables  */
+div#clusterInfo  table tr:nth-child(2) th { 
+  background-color: #fff;
+  border-bottom: 1px solid #eee;
+  border-right: 1px solid #f9f9f9;
+  border-left: 1px solid #f9f9f9;
+  border-top: 1px solid #f9f9f9;
+  font-size: 9px !important;
+  font-weight: 400 !important;
+  color:  #aaa;
+  padding-left: 5px;
+}
+div#clusterInfo  table td { 
+	background-color: #fff;
+	border-right: 1px solid #f9f9f9;
+	border-left: 1px solid #f9f9f9;
+  border-top: 1px solid #eee;
+  padding: 5px 2px 5px 5px;
+
+}
+
+div#clusterInfo  table { 
+	/*-webkit-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.1);*/
+	border-bottom: 2px solid #1e1e1e;
+}
+div#clusterInfo  div.stuff { margin-left:0px; text-align: left; word-wrap: break-word;}
+div#clusterInfo  span.title {font-size: 12px; font-weight: bold;}
+div#clusterInfo  span.source {font-size: 11px;}
+div#clusterInfo  span.nums { font-size: 11px; text-align:right;float:right; padding-top:2px;}
+div#clusterInfo  img.action {cursor: pointer; position: fixed;margin-left: -34px; margin-top:-8px;width:30px;}
+
+/* ....................................................................... */
+/* ....................................................................... */
+/* SVG elements */
+
+/* Graph bar*/
+
+#mygraph{
+   background-color:white !important;
+  /* -webkit-box-shadow: -2px 2px 2px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: -2px 2px 2px rgba(0, 0, 0, 0.1);*/
+         }
+#mygraph path.domain{
+stroke:#ccc;
+         }
+
+#mygraph text{
+  fill:#3d464d;
+         }
+
+ .bar {
+      fill: #81BEF7; !important;
+      stroke: white; !important;
+    }
+		 
+
+/* Biblio */	 
+		 
+div#biblioMap {
+    overflow: hidden;
+}
+
+div#biblioMap svg {
+    background-color: #fff; 
+    margin-left: 50px;
+    margin-right: 50px;
+    width: 90%;
+    cursor: move;
+}
+
+.axis {font: 10px sans-serif;}
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+line.link {
+    stroke: #B2D9D8;
+}
+
+line.linking {
+    stroke: #2E9AFE;
+}
+
+circle {
+    cursor: crosshair;
+}
+
+circle.sibling {
+  fill-opacity: 0.6;
+}
+
+circle.main {
+  stroke: #333;
+  stroke-width: 3px;
+  stroke-opacity: 0.3;
+  fill-opacity: 1;
+}
+
+circle.found {
+    stroke: #0095D7;
+    stroke-width: 3px;
+}
+
+rect {
+    cursor: crosshair;
+}
+
+rect.main {
+    stroke: #1e1e1e;
+    fill-opacity: 1.0;
+}
+
+rect.found {
+    stroke: #0095D7;
+    stroke-width: 3px;
+}
+
+/* ....................................................................... */
+/* Graph labels */
+
+g.gLabel {
+    font: 10px sans-serif;
+    font-weight: normal;
+    visibility: hidden;
+  font-family: 'Roboto', sans-serif;
+  color : #3d464d;
+  /*text-transform:lowercase;*/
+  font-size: 12px;
+  font-weight: 400;
+}
+
+g.on {
+    visibility: visible;    
+    opacity:0.5;
+}
+
+g.zoomed {
+    font-size: 10px;
+    font-weight: normal;
+    text-align: center;
+    color: #000;
+    border: none;
+}
+
+text {
+    font: 0.9vw sans-serif;
+    font-weight: normal;
+}
+
+text.nlabel {
+    /*stroke: #000000;*/
+}
+
+text.sibling {
+    stroke-opacity: 0.0;
+    fill-opacity:1.0;
+    fill: #333 !important;
+    font: 1vw 'Roboto', sans-serif !important;
+    font-variant: : small-caps !important;
+    /*stroke: #000000;*/
+}
+
+text.nshadow {
+    stroke: #fff;
+    stroke-width: 4px;
+    stroke-opacity: 1.0;
+}
+
+text.nshadowB{
+    visibility: hidden;
+}
+
+text.main {
+    font: 1.2vw sans-serif !important;
+    font-weight: bold !important;
+    font-variant: small-caps !important;
+}

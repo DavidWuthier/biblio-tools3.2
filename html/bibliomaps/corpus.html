@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>BiblioMaps/corpus</title>
+    <link rel="stylesheet" type="text/css" href="css/loading.css" media="screen" />
+    <link rel="stylesheet" href="css/input.css"/>
+    <link rel="stylesheet" href="css/bibliomap_corpusdescription.css"/>
+    <script type="text/javascript">
+      function loadPage(href){
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.open("GET", href, false);
+        xmlhttp.send();
+        return xmlhttp.responseText;
+      }
+    </script>
+  <script src="js/d3.min.js"></script>
+  <script src="js/jLouvain.js"></script>
+  <script src="js/topojson.min.js"></script>
+  <script src="js/datamaps.world.min.js"></script> 
+  <script src="js/bibliomap_togglemenu.js"></script>
+  <script src="js/bibliomap_drawNTW.js"></script> 
+  <script src="js/bibliomap_drawWORDCLOUD.js"></script>  
+  <script src="js/bibliomap_corpusdescription.js"></script> 
+<style>
+.SGTAB table, .SGTAB th, .SGTAB td {border: 0px solid black; border-collapse: collapse; padding-left:3px; padding-right:3px; }
+.SGTAB table th {background:#d4d4d4;}   
+.SGTAB table tr:nth-child(odd) { background:#f4f4f4;}
+.SGTAB table tr:nth-child(even) { background:white;}  
+</style>
+</head>
+
+<body onload="d3.select('#headermenu').html(loadPage('headermenu.html'));togglemenu('2');">
+  <!-- HEADER+MENU  -->
+  <div id="headermenu"></div>
+
+  <!--SELECT-->
+  <div id="sidepanel" >
+    <div id="title">Corpus Description<br/><span id="choosecorpus"></span></div>
+
+    <div id="subtitle">
+      <p style="margin-top:0;"><strong>The studied corpus contains <span id="NUMPUB"></span> publications</strong>. To get an idea of their general contents, here you can explore different items (keywords, references, publication journals, subject categories, etc) they use.</p>
+
+      <table style="width:95%;border-collapse:collapse">
+      <tr><td style="width:175px;">Select field to analyze:</td><td></td></tr>
+      <tr><td><span id="itemselection"></span></td><td><div id="info_fs" class="infobulle">?</div></td></tr>
+      <tr style="height:5px;"></tr>
+      <tr><td>Select graph type:</td><td></td></tr>
+      <tr><td><span id="graphselection"></span></td><td><div id="info_gt" class="infobulle">?</div></td></tr>
+      <tr style="height:5px;"></tr>
+      <tr><td>Sort list by:</td><td></td></tr>
+      <tr><td><span id="sortTAB"></span></td><td><div id="info_sl" class="infobulle">?</div></td></tr>
+      </table>
+      <br/>
+    </div>
+    <div>
+      <p id="noneAV" style="opacity:0;margin-top:5px;margin-bottom:0px;padding-top:10px;padding-bottom:10px;padding-left:10px;padding-right:5px;font-size:11px;background:lightblue"></p>
+      <p id="custominfo" style="opacity:0;margin-top:5px;margin-bottom:0px;padding-top:10px;padding-bottom:10px;padding-left:10px;padding-right:5px;font-size:11px;background:lightblue"></p>
+      <!-- #E6B9F6 -->
+    </div>
+  </div>
+
+  <div id="tooltip_bulle"></div>
+  <div class="clearing"></div>
+
+  <div id="container">
+    <!-- LIST-->
+    <div id="list">
+      <div id="titleTAB" style="margin-top:0.5em;margin-bottom:1em;text-align:center;font-size:1.3em;font-weight:bold;color:#0095D7;"></div>
+      <div id="listTAB" class="SGTAB" style="overflow-y:auto;"></div>      
+    </div>
+
+    <!-- GRAPH-->
+    <div id="graph_container" >
+      <div id="titleGRAPH" style="margin-top:0.5em;margin-bottom:1em;text-align:center;font-size:1.3em;font-weight:bold;color:#0095D7;"></div>
+      <div id="graph"></div>   
+    </div>
+
+  </div>
+
+  <!-- TOOLTIP-->
+  <div id="tooltip"></div>
+
+  <!-- SLIDER-->
+  <div id="slider" class="slider"></div>
+
+  <!-- REDO CLOUD BUTTON-->
+  <div id="redocloud" class="redocloud"></div>
+  
+</body>
+
+<script> 
+    var field_option = 'K'
+    var graph_option = 'custom'
+    var dirdatafreqs=''
+    var fooTHR={}
+    var fooForce={}
+
+    // ***************************************************
+    // how many corpus need to be displayed?   
+    howmany='one'  // 'one' or 'several'
+    // ***************************************************
+    
+    // case when only one corpus
+    if(howmany=='one'){
+      dirdatafreqs='data/freqs/'
+      fooTHR={'K':0.05,'AK':0.05,'TK':0.05,'S':0,'R':0.1,'RJ':0.3}
+      fooForce={'K':2.0,'AK':2.0,'TK':2.0,'S':2,'R':3.5,'RJ':1.5}
+      doCDviz();
+    }
+
+    // case when there are several corpus
+    if(howmany=='several'){
+      // ************************************
+      // copy here the line that was written in the AA_log.txt file when you run the all_in_one.py python file.
+      // it should be of the form: timeWND=[[Y1A, Y1B],[Y2A,Y2B]];
+      timeWND=[]
+
+      // ************************************
+
+      thehtml='<select id="selectC" style="width:140px;background-color:#F8F8F8;color:#0095D7;font-weight:bold;">'
+      timeWND.forEach(function(elt,i){thehtml+='<option value="'+i+'">'+elt[0]+'-'+elt[1]+' corpus</option>'})
+      thehtml+='</select>'
+      d3.select('#choosecorpus').html(thehtml)
+      d3.select('#selectC').on('change',function(){update_corpus();})
+      update_corpus();
+
+      function update_corpus(){
+        myTW=document.getElementById("selectC").value;
+        dirdatafreqs='data/freqs_'+timeWND[myTW][0]+'_'+timeWND[myTW][1]+'/'
+        fooTHR={'K':0.05,'AK':0.05,'S':0,'R':0.1,'RJ':0.3}
+        fooForce={'K':2.0,'AK':2.0,'S':2,'R':3.5,'RJ':1.5}
+
+        // copy paste and edit the following lines if you wan to adjust the parameters of a network viz for a given corpus
+        /*
+        if (timeWND[myTW][0]+'-'+timeWND[myTW][1]=="2005-2009"){
+          fooTHR={'AK':0.05,'K':0.1,'S':0,'R':0.1,'RJ':0.3}
+          fooForce={'K':2.0,'S':2,'R':3.5,'RJ':1.5}  
+        }
+        */
+
+        // do viz
+        doCDviz();
+      }
+    }
+
+
+
+</script>
+
+</html>
