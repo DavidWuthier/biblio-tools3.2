@@ -21,9 +21,10 @@ clean:
 
 install:
 	rm -f /var/www/html/index.html
-	cp -r ../html/bibliomaps /var/www/html/
+	cp -r ../html/bibliomaps /var/www/html
+	mkdir -p /var/www/html/bibliomaps/data
 	cp -r ./processed/freqs /var/www/html/bibliomaps/data
-	cp -r ./processed/jsonfiles/* /var/www/html/bibliomaps/data
+	cp ./processed/jsonfiles/* /var/www/html/bibliomaps/data
 
 uninstall:
 	rm -rf /var/www/html/bibliomaps
